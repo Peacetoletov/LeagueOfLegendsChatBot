@@ -19,30 +19,34 @@ public class MainClass {
         for(Entry<Long,String> keyboard:GlobalKeyboardHook.listKeyboards().entrySet())
             System.out.format("%d: %s\n", keyboard.getKey(), keyboard.getValue());
 
+        final TypeInLeague type = new TypeInLeague();
+
         keyboardHook.addKeyListener(new GlobalKeyAdapter() {
             @Override public void keyPressed(GlobalKeyEvent event) {
                 System.out.println(event);
-                if(event.getVirtualKeyCode()==GlobalKeyEvent.VK_ESCAPE)
+                if (event.getVirtualKeyCode() == GlobalKeyEvent.VK_ESCAPE)
                     run = false;
 
 
-                //My code starts here
-
-                if(event.getVirtualKeyCode()==GlobalKeyEvent.VK_NUMPAD1) {
-                    TypeInLeague type = new TypeInLeague();
+                if (event.getVirtualKeyCode() == GlobalKeyEvent.VK_NUMPAD9) {
                     type.kek();
                 }
-                if(event.getVirtualKeyCode()==GlobalKeyEvent.VK_NUMPAD2) {
-                    TypeInLeague type = new TypeInLeague();
+                if (event.getVirtualKeyCode() == GlobalKeyEvent.VK_NUMPAD8) {
                     type.sick();
                 }
+                if (event.getVirtualKeyCode() == GlobalKeyEvent.VK_NUMPAD7) {
+                    type.gg();
+                }
+                if (event.getVirtualKeyCode() == GlobalKeyEvent.VK_NUMPAD6) {
+                    type.fourtwenty();
+                }
 
-                //My code ends here
 
 
             }
             @Override public void keyReleased(GlobalKeyEvent event) {
-                System.out.println(event); }
+                System.out.println(event);
+            }
         });
 
         try {

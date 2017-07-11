@@ -18,6 +18,10 @@ public class TypeInLeague {
         charMap.put("S", KeyEvent.VK_S);
         charMap.put("I", KeyEvent.VK_I);
         charMap.put("C", KeyEvent.VK_C);
+        charMap.put("G", KeyEvent.VK_G);
+        charMap.put("4", KeyEvent.VK_NUMPAD4);
+        charMap.put("2", KeyEvent.VK_NUMPAD2);
+        charMap.put("0", KeyEvent.VK_NUMPAD0);
         charMap.put(".", KeyEvent.VK_PERIOD);
     }
 
@@ -57,6 +61,42 @@ public class TypeInLeague {
         }
     }
 
+    public void gg(){
+        try {
+            Robot robot = new Robot();
+
+            String[] ggChars = new String[5];
+            ggChars[0] = "...GGGG.........GGGG...";
+            ggChars[1] = "G...................G................";
+            ggChars[2] = "G......GG......G......GG...";
+            ggChars[3] = "G............G....G............G";
+            ggChars[4] = "...GGGG.........GGGG...";
+
+            typeWord(ggChars, robot);
+        }
+        catch (AWTException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void fourtwenty(){
+        try {
+            Robot robot = new Robot();
+
+            String[] fourtwentyChars = new String[5];
+            fourtwentyChars[0] = ".........4........2222........000..";
+            fourtwentyChars[1] = "......4.4......2.........2...0......0";
+            fourtwentyChars[2] = "...4....4...............2.....0......0";
+            fourtwentyChars[3] = "444444.........2.........0......0";
+            fourtwentyChars[4] = ".........4.........2222......000..";
+
+            typeWord(fourtwentyChars, robot);
+        }
+        catch (AWTException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void typeWord(String[] wordChars, Robot robot){
         pressCapsLock(robot);
         //Loop through each array
@@ -65,39 +105,41 @@ public class TypeInLeague {
             for(int j = 0; j < wordChars[i].length(); j++){
                 char character = wordChars[i].charAt(j);
                 String letter = Character.toString(character);      //Convert the char into a string
-
                 int key = charMap.get(letter);
+
                 if (j == 0){
                     startNewRow(robot);
                 }
+
                 robot.keyPress(key);
-                robot.delay(5);
+                robot.delay(1);
                 robot.keyRelease(key);
+
+                if (j == wordChars[i].length() - 1){
+                    pressEnter(robot, 50);
+                }
             }
         }
-        afterTyping(robot);
+        pressCapsLock(robot);
     }
 
     private void startNewRow(Robot robot){
         robot.keyPress(KeyEvent.VK_SHIFT);
-        robot.delay(100);
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.delay(100);
-        robot.keyRelease(KeyEvent.VK_ENTER);
+        robot.delay(50);
+        pressEnter(robot, 50);
         robot.delay(10);
         robot.keyRelease(KeyEvent.VK_SHIFT);
+    }
+
+    private void pressEnter(Robot robot, int delay){
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.delay(delay);
+        robot.keyRelease(KeyEvent.VK_ENTER);
     }
 
     private void pressCapsLock(Robot robot){
         robot.keyPress(KeyEvent.VK_CAPS_LOCK);
         robot.delay(5);
         robot.keyRelease(KeyEvent.VK_CAPS_LOCK);
-    }
-
-    private void afterTyping(Robot robot){
-        pressCapsLock(robot);
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.delay(5);
-        robot.keyRelease(KeyEvent.VK_ENTER);
     }
 }
